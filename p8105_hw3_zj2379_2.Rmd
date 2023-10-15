@@ -170,4 +170,21 @@ nhanes_covar =
   na.omit() 
 nhanes_covar
 ```
+```{r}
+nhanes_accel = 
+  read_csv("nhanes_accel.csv") |>
+  janitor::clean_names()|>
+   pivot_longer(                                           
+    min1:min1440,
+    names_to = "number",
+    values_to = "counts",
+    names_prefix = "min"
+  )
+nhanes_accel
+```
+
+```{r}
+# combine the two datasets
+nhanes_df = left_join(nhanes_covar,nhanes_accel,by = "seqn")
+```
 
