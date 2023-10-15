@@ -209,3 +209,27 @@ ggsave("Age Distribution for Sex for three Education levels.pdf")
 ```
 
 Based on the graphs, at the high school equivalent education level, the number of females exceeds the number of males as age increases. At the less than high school education level, the number of females first exceeds the number of males then becomes lower than that of males as age increases. At the more than high school education level, the number of females is originally higher than the number of males and then becomes lower than that of males as age increases.Overall, females and younger people have relatively higher education level than other age groups.
+
+create a total activity variable for each participant
+```{r}
+accel_clean = 
+  nhanes_df |>                                                                  
+  group_by(seqn, sex, age, education) |>                        
+  summarize(
+    total_activity = sum(counts)                                
+  )
+accel_clean|>
+ggplot(aes(x = age, y = total_activity, color = sex)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  facet_grid(. ~ education)+
+  labs(
+    title = "total activities against age",
+    x = "age",
+    y = "total activities",
+  ) 
+ggsave("total activities against age.pdf")
+```
+
+At high school equivalent and more than high school education level, overall females activity is higher than males for people 22yr+. At less than high school education level, the overall males activity is higher than females between 40 and 80, but lower than that of females between 20 and 40. At more than high school education level,overall females activity is higher than males at all age groups. No matter education level and gender, total activity decreases as the age increases.
+
