@@ -196,3 +196,16 @@ table(education_table)
 ```
 
 At the High school equivalent education level, the number of male is 34 and the number of female is 23, more male than female. At less than high school education level,the number of male is 28 and the number of female is 27, more male than female. At more than high school education level,the number of male is 59 and the number of female is 54, more male than female.
+
+```{r}
+nhanes_covar |>
+ggplot(aes(x = age, fill = sex )) +
+  geom_density(alpha = .5) +
+  facet_grid(. ~ education)+
+  labs( title = "Age Distribution for Sex for three Education levels",
+    y = "age",
+    x = "density")
+ggsave("Age Distribution for Sex for three Education levels.pdf")
+```
+
+Based on the graphs, at the high school equivalent education level, the number of females exceeds the number of males as age increases. At the less than high school education level, the number of females first exceeds the number of males then becomes lower than that of males as age increases. At the more than high school education level, the number of females is originally higher than the number of males and then becomes lower than that of males as age increases.Overall, females and younger people have relatively higher education level than other age groups.
