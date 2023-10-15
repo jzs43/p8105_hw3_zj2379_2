@@ -61,3 +61,34 @@ instacart |>
     names_from = order_dow, 
     values_from = mean_hour) |>
   knitr::kable(digits = 2)
+```
+
+
+## Problem 2
+
+```{r}
+#load the data
+library(p8105.datasets)
+data("brfss_smart2010")
+brfss_smart2010
+```
+First, do some data cleaning:
+format the data to use appropriate variable names;
+focus on the “Overall Health” topic
+include only responses from “Excellent” to “Poor”
+organize responses as a factor taking levels ordered from “Poor” to “Excellent”
+```{r}
+#do some data cleaning following the above guideline
+brfss_smart = 
+  brfss_smart2010 |> 
+  as_tibble()
+brfss_smart = 
+  brfss_smart |>
+  janitor::clean_names() |>
+  rename(state = locationabbr, location_state = locationdesc) |>
+  filter(topic %in% "Overall Health") |>
+  mutate(response = fct_relevel(response, "Poor","Fair","Good","Very good","Excellent"))
+
+```
+
+
