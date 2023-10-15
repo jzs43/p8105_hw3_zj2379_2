@@ -131,3 +131,17 @@ ggsave("line plot for each state.pdf")
   
 ```
 This plot shows a line for each state across years from 2002 to 2010.
+
+
+Make a two-panel plot showing, for the years 2006, and 2010
+```{r}
+brfss_smart |>
+  group_by(year,response,state,data_value) |>
+  filter(year %in% c("2006","2010")) |>
+  filter(state %in% "NY")|>
+  ggplot(aes(x = response, y = data_value)) + 
+  geom_boxplot() + 
+  facet_grid(. ~ year)
+  ggsave("two-panel plot for 2006 and 2010.pdf")
+```
+This plot shows the distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State in 2006 and 2010 respectively. Based on the graphs, the group with "poor" responses has the lowest data values at both years, good and very good responses have relatively high data values.
