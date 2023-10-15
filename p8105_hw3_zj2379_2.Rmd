@@ -233,3 +233,21 @@ ggsave("total activities against age.pdf")
 
 At high school equivalent and more than high school education level, overall females activity is higher than males for people 22yr+. At less than high school education level, the overall males activity is higher than females between 40 and 80, but lower than that of females between 20 and 40. At more than high school education level,overall females activity is higher than males at all age groups. No matter education level and gender, total activity decreases as the age increases.
 
+
+A three-panel plot that shows the 24-hour activity time courses for each education level and use color to indicate sex.
+```{r}
+nhanes_df |>
+ggplot(aes(x = number, y = counts, group = seqn, color = sex)) +
+  geom_line(alpha = .2) +
+  facet_grid(. ~ education) +
+  geom_smooth(aes(group = sex), se = FALSE)+
+  labs(
+    title = "total activities over 24-hour",
+    x = "time(mins)",
+    y = "total activities",
+  ) 
+ggsave("total activities over 24-hour.pdf")
+```
+
+Based on the plot, the 24-hour activity time courses for high school equivalent and less than high school education levels are similar. At more than high school education level, there are two peaks of activities. In addition, females have higher activities than males do.From the smooth trends, we could see a decrease for every education level. 
+
