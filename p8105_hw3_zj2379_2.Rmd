@@ -1,0 +1,24 @@
+---
+title: "p8105_hw3_zj2379_2"
+author: "Zheshu Jiang"
+date: "2023-10-15"
+output: github_document
+---
+problem 1 part 1 for first try, I have done the hw two days before, but I tried to make some changes, i found i could only update rmd file but not md file, so i am doing it again, my previous hw3 link is https://github.com/jzs43/p8105_hw3_zj2379/tree/main for reference
+
+## Problem1
+```{r}
+library(p8105.datasets)
+data("instacart")
+library(tidyverse)
+library(ggridges)
+library(patchwork)
+```
+
+```{r}
+instacart |> 
+  count(aisle) |> 
+  arrange(desc(n))
+```
+
+There are 134 aisles, with fresh vegetables and fresh fruits holding the most items ordered.
