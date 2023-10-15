@@ -145,3 +145,29 @@ brfss_smart |>
   ggsave("two-panel plot for 2006 and 2010.pdf")
 ```
 This plot shows the distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State in 2006 and 2010 respectively. Based on the graphs, the group with "poor" responses has the lowest data values at both years, good and very good responses have relatively high data values.
+
+## Problem3
+
+```{r}
+nhanes_covar = 
+  read_csv("nhanes_covar.csv",skip = 4) |>
+  janitor::clean_names() |>
+  # exclude participants less than 21 years of age
+  filter(age > 21) |>
+  mutate(
+    sex = recode(sex, "1" = "male", "2" = "female"),
+      education = recode(
+      education, 
+      "1" = "Less than high shcool", 
+      "2" = "High school equivalent",
+      "3" = "More than high school"),
+  )|>
+ mutate(
+   sex = as.factor(sex), 
+   education = as.factor(education)
+ )|>
+  #exclude those observations with missing demographic data
+  na.omit() 
+nhanes_covar
+```
+
