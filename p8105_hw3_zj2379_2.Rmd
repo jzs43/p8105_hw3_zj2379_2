@@ -91,4 +91,24 @@ brfss_smart =
 
 ```
 
+```{r}
+# keep only data from 2002 to see which states were observed at 7 or more locations
+brfss_smart |>
+  filter(year == "2002") |>
+  group_by(state) |>                                                    
+  summarize(n = n_distinct(location_state)) |>  
+  filter(n >= 7)
+```
+This plot shows a line for each state across years from 2002 to 2010.
+In 2002, CT, FL, MA, NC, Nj, PA were observed at 7 or more locations.
 
+```{r}
+# keep only data from 2010 to see which states were observed at 7 or more locations
+brfss_smart |>
+  filter(year == "2010") |>
+  group_by(state) |>                                                    
+  summarize(n = n_distinct(location_state)) |>  
+  filter(n >= 7)
+```
+
+In 2010, CA, CO, FL, MA, MD, NC, NE, NJ, HY, OH, PA, SC, TX, WA were observed at 7 or more locations.
